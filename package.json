@@ -1,0 +1,24 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@egoist/tailwindcss-icons": "^1.9.0",
+        "@iconify-json/bi": "^1.2.2",
+        "@iconify-json/hugeicons": "^1.2.3",
+        "@iconify-json/mdi": "^1.2.3",
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.7.4",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.5.1",
+        "tailwindcss": "^3.4.17",
+        "vite": "^6.0"
+    },
+    "dependencies": {
+        "alpinejs": "^3.14.8"
+    }
+}
