@@ -12,3 +12,5 @@ h6 {@apply text-lg}
 table, th, td {
     @apply border border-primary-950 text-center p-1
 }
+
+[x-cloak] { display: none !important; }

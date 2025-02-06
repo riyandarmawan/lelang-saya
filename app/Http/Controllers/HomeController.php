@@ -13,7 +13,7 @@ class HomeController extends Controller
         // Fetch categories with related auctions, items, and winner data
         $kategoris = Kategori::with([
             'lelangs' => function ($query) {
-                $query->with(['barang', 'masyarakat']); // Load barang and masyarakat (user) relations
+                $query->with(['barang', 'masyarakat', 'historyLelangs', 'historyLelangs.masyarakat']); // Load barang and masyarakat (user) relations
             }
         ])->get();
 
@@ -35,6 +35,10 @@ class HomeController extends Controller
                 }
 
                 $lelang->tanggal_tutup_lelang = 'Ditutup ' . Carbon::parse($lelang->tanggal_tutup_lelang)->diffForHumans();
+
+                foreach ($lelang->historyLelangs as $historyLelang) {
+                    $historyLelang->penawaran_harga = 'Rp ' . number_format($historyLelang->penawaran_harga, 0, ',', '.');
+                }
             }
         }
 

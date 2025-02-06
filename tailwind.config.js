@@ -10,6 +10,12 @@ export default {
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
+    safelist: [
+        'text-yellow-500',
+        'text-green-500',
+        'i-mdi-lock',
+        'i-hugeicons-auciton',
+    ],
     theme: {
         container: {
             center: true,
