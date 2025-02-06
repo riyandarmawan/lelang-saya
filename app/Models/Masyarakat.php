@@ -16,4 +16,9 @@ class Masyarakat extends Authenticatable
     public function lelangs() {
         return $this->hasMany(Lelang::class, 'id', 'id_user');
     }
+
+    public function historyLelangs()
+    {
+        return $this->hasMany(HistoryLelang::class, 'id_user', 'id');
+    }
 }

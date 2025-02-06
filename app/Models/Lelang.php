@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\Petugas;
 use App\Models\Kategori;
 use App\Models\Masyarakat;
+use App\Models\HistoryLelang;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,6 +26,11 @@ class Lelang extends Model
                 $lelang->harga_akhir = $barang->harga_awal;
             }
         });
+    }
+
+    public function historyLelangs()
+    {
+        return $this->hasMany(HistoryLelang::class, 'id_lelang', 'id');
     }
 
     public function kategori()
