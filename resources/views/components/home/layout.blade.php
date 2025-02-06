@@ -6,7 +6,9 @@
             <nav class="flex items-center gap-6 text-lg font-medium">
                 <a href="/">Beranda</a>
                 @if (auth('masyarakat')->user() || auth('petugas')->user())
-                    @if (auth('petugas')->user())
+                    @if (auth('masyarakat')->user())
+                        <a href="/my-bid" class="min-w-36 w-fit">Penawaran saya</a>
+                    @elseif (auth('petugas')->user())
                         <a href="/dashboard/barang"
                             class="rounded border border-white px-4 py-2 shadow hover:bg-white hover:text-primary-500">Dashboard</a>
                     @endif

@@ -22,13 +22,13 @@ class LelangFactory extends Factory
     {
         return [
             'id_barang' => Barang::factory(),
-            'tanggal_lelang' => fake()->dateTimeBetween('-30 days', '+30 days')->format('Y-m-d'),
-            'tanggal_tutup_lelang' => fake()->dateTimeBetween('+30days', '+60 days')->format('Y-m-d'),
+            'tanggal_lelang' => fake()->dateTimeBetween('-30days', '30days')->format('Y-m-d'),
+            'tanggal_tutup_lelang' => fake()->dateTimeBetween('-30days', 'now')->format('Y-m-d'),
             'harga_akhir' => '0',
             'id_user' => Masyarakat::factory(),
             'id_petugas' => Petugas::factory(),
             'id_kategori' => Kategori::factory(),
-            'status' => 'ditutup',
+            // 'status' => 'ditutup',
         ];
     }
 }

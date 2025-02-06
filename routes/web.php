@@ -6,8 +6,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LelangController;
+use App\Http\Controllers\HistoryLelangController;
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/my-bid', [HomeController::class, 'myBid']);
 
 Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'postLogin']);
@@ -15,7 +17,7 @@ Route::get('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/register', [AuthController::class, 'postRegister']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
-Route::middleware(['auth', 'petugas'])->group(function () {
+Route::middleware(['auth:petugas'])->group(function () {
     Route::get('/dashboard/barang', [BarangController::class, 'index']);
     Route::get('/dashboard/barang/create', [BarangController::class, 'create']);
     Route::post('/dashboard/barang/create', [BarangController::class, 'store']);
@@ -29,4 +31,8 @@ Route::middleware(['auth', 'petugas'])->group(function () {
     Route::get('/dashboard/lelang/update/{id}', [LelangController::class, 'update']);
     Route::post('/dashboard/lelang/update/{id}', [LelangController::class, 'change']);
     Route::post('/dashboard/lelang/delete/{id}', [LelangController::class, 'delete']);
+});
+
+Route::middleware(['auth:masyarakat'])->group(function () {
+    Route::post('/bid/{id}', [HistoryLelangController::class, 'bid']);
 });

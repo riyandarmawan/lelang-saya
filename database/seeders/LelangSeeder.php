@@ -17,8 +17,6 @@ class LelangSeeder extends Seeder
      */
     public function run(): void
     {
-        Lelang::factory()->recycle([Barang::all(), Petugas::all(), Masyarakat::all(), Kategori::all()])->create(['status' => 'dibuka']);
-
-        Lelang::factory(10)->recycle([Barang::all(), Petugas::all(), Masyarakat::all(), Kategori::all()])->create();
+        Lelang::factory(10)->recycle([Barang::all(), Masyarakat::all(), Petugas::all(), Kategori::all()])->create();
     }
 }

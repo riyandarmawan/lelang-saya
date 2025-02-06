@@ -13,7 +13,9 @@ export default {
     safelist: [
         'text-yellow-500',
         'text-green-500',
+        'text-red-500',
         'i-mdi-lock',
+        'i-mdi-close-circle',
         'i-hugeicons-auciton',
     ],
     theme: {

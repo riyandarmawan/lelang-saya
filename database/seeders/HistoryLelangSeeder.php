@@ -16,6 +16,6 @@ class HistoryLelangSeeder extends Seeder
      */
     public function run(): void
     {
-        HistoryLelang::factory(10)->recycle(Lelang::all(), Barang::all(), Masyarakat::all())->create();
+        HistoryLelang::factory(20)->recycle(Lelang::all(), Barang::all(), Masyarakat::all())->create();
     }
 }

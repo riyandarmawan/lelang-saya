@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             BarangSeeder::class,
             KategoriSeeder::class,
             LelangSeeder::class,
-            HistoryLelangSeeder::class,
+            // HistoryLelangSeeder::class,
         ]);
     }
 }

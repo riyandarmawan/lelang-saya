@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('id_user')->nullable();
             $table->integer('id_petugas');
             $table->integer('id_kategori');
-            $table->enum('status',['dibuka', 'ditutup'])->default('ditutup');
+            // $table->enum('status',['dibuka', 'ditutup'])->default('ditutup');
             $table->timestamps();
 
             $table->foreign('id_barang')->references('id')->on('barangs')->onUpdate('cascade')->onDelete('cascade');
