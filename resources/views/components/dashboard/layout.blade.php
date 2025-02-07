@@ -24,11 +24,6 @@
                     <span class="i-hugeicons-auction text-4xl"></span>
                     Lelang
                 </a>
-                <a href="/dashboard/penawaran"
-                    class="flex items-center gap-4 rounded p-2 text-2xl font-semibold {{ Request::is('dashboard/penawaran') || Request::is('dashboard/penawaran/*') ? 'bg-white text-primary-500 hover:bg-opacity-90' : 'hover:bg-white hover:text-primary-500' }}">
-                    <span class="i-mdi-hand-front-left text-4xl"></span>
-                    Penawaran
-                </a>
             </nav>
             <form action="/auth/logout" method="post" class="w-full">
                 @csrf

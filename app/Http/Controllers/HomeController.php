@@ -30,7 +30,7 @@ class HomeController extends Controller
                     $lelang->status_class = 'text-yellow-500';
                     $lelang->icon = 'i-mdi-lock';
                 } else if (now()->greaterThan($lelang->tanggal_tutup_lelang) && $lelang->masyarakat) {
-                    $lelang->status_message = $lelang->masyarakat->nama_lengkap . ' (@'.$lelang->masyarakat->username.')' . ' memenangi lelang dengan harga akhir mencapai Rp ' . $lelang->harga_akhir_format;
+                    $lelang->status_message = $lelang->masyarakat->nama_lengkap . ' (@' . $lelang->masyarakat->username . ')' . ' memenangi lelang dengan harga akhir mencapai Rp ' . $lelang->harga_akhir_format;
                     $lelang->status_class = 'text-green-500';
                     $lelang->icon = 'i-hugeicons-auction';
                 } else if (now()->greaterThan($lelang->tanggal_tutup_lelang)) {
@@ -70,11 +70,18 @@ class HomeController extends Controller
         // Filter categories to only include those with user's lelangs
         $kategoris = $kategoris->map(function ($kategori) use ($userId) {
             // Filter lelangs within the category
-            $kategori->lelangs = $kategori->lelangs->filter(fn($lelang) => $lelang->id_user === $userId);
+            $kategori->lelangs = $kategori->lelangs->map(function ($lelang) use ($userId) {
+                // Filter history lelangs berdasarkan userId
+                $lelang->historyLelangs = $lelang->historyLelangs->filter(fn($historyLelang) => $historyLelang->id_user == $userId);
 
-            // Return the category only if it has lelangs left
+                // Hanya kembalikan lelang jika ada historyLelangs yang cocok
+                return $lelang->historyLelangs->isNotEmpty() ? $lelang : null;
+            })->filter(); // Hapus lelang yang null
+
+            // Return kategori hanya jika masih memiliki lelangs
             return $kategori->lelangs->isNotEmpty() ? $kategori : null;
-        })->filter();
+        })->filter(); // Hapus kategori yang null
+
 
         // Process each auction (lelang)
         foreach ($kategoris as $kategori) {
@@ -83,18 +90,10 @@ class HomeController extends Controller
                 $lelang->harga_akhir_format = number_format($lelang->harga_akhir, 0, ',', '.');
                 $lelang->tanggal_tutup_lelang = Carbon::parse($lelang->tanggal_tutup_lelang);
 
-                if (now()->lessThan($lelang->tanggal_lelang)) {
-                    $lelang->status_message = 'Dibuka ' . $lelang->tanggal_lelang->diffForHumans();
-                    $lelang->status_class = 'text-yellow-500';
-                    $lelang->icon = 'i-mdi-lock';
-                } else if (now()->greaterThan($lelang->tanggal_tutup_lelang) && $lelang->masyarakat) {
-                    $lelang->status_message =  'Anda memenangi lelang dengan harga akhir mencapai Rp ' . $lelang->harga_akhir_format;
+                if (now()->greaterThan($lelang->tanggal_tutup_lelang) && $lelang->masyarakat) {
+                    $lelang->status_message = $lelang->masyarakat->nama_lengkap . ' (@' . $lelang->masyarakat->username . ')' . ' memenangi lelang dengan harga akhir mencapai Rp ' . $lelang->harga_akhir_format;
                     $lelang->status_class = 'text-green-500';
                     $lelang->icon = 'i-hugeicons-auction';
-                } else if (now()->greaterThan($lelang->tanggal_tutup_lelang)) {
-                    $lelang->status_message = 'Lelang berakhir tanpa pemenang!';
-                    $lelang->status_class = 'text-red-500';
-                    $lelang->icon = 'i-mdi-close-circle';
                 }
 
                 $lelang->tanggal_tutup_lelang = 'Ditutup ' . $lelang->tanggal_tutup_lelang->diffForHumans();
@@ -105,9 +104,8 @@ class HomeController extends Controller
             }
         }
 
-        // Passing processed data to the view
         $data = [
-            'title' => 'Beranda | lelangsaya',
+            'title' => 'Penawaran saya | lelangsaya',
             'kategoris' => $kategoris,
         ];
 

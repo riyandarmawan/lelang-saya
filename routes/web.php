@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\LelangController;
 use App\Http\Controllers\HistoryLelangController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/my-bid', [HomeController::class, 'myBid']);
@@ -18,6 +19,9 @@ Route::post('/auth/register', [AuthController::class, 'postRegister']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth:petugas'])->group(function () {
+    Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+    Route::get('/dashboard/laporan/exports/pdf', [LaporanController::class, 'exportPdf']);
+
     Route::get('/dashboard/barang', [BarangController::class, 'index']);
     Route::get('/dashboard/barang/create', [BarangController::class, 'create']);
     Route::post('/dashboard/barang/create', [BarangController::class, 'store']);

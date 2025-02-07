@@ -1,7 +1,7 @@
 <x-dashboard.layout :$title>
     <div class="w-full p-8">
         <h2 class="mb-6 font-semibold">Data Lelang</h2>
-        <a href="/dashboard/Lelang/create"
+        <a href="/dashboard/lelang/create"
             class="mb-6 inline-block rounded bg-primary-500 px-4 py-2 font-semibold text-white shadow hover:bg-primary-600">Tambah
             Barang</a>
         @if (session('success'))
@@ -12,22 +12,22 @@
         <table class="mb-4 table w-full table-auto border-collapse">
             <thead>
                 <th>Tanggal Lelang</th>
-                <th>Harga Akhir</th>
-                <th>User</th>
+                <th>Tanggal Tutup Lelang</th>
+                <th>Harga Terkini / Akhir</th>
+                <th>Penawar Terbaru / Pemenang</th>
                 <th>Petugas</th>
                 <th>Kategori</th>
-                <th>Status</th>
                 <th>Aksi</th>
             </thead>
             <tbody>
                 @foreach ($lelangs as $lelang)
                     <tr>
                         <td>{{ $lelang->tanggal_lelang }}</td>
+                        <td>{{ $lelang->tanggal_tutup_lelang }}</td>
                         <td>Rp {{ number_format($lelang->harga_akhir, 0, ',', '.') }}</td>
-                        <td>{{ $lelang->masyarakat->nama_lengkap }}</td>
+                        <td>{{ $lelang->masyarakat->nama_lengkap ?? '-' }}</td>
                         <td>{{ $lelang->petugas->nama_petugas }}</td>
                         <td>{{ $lelang->kategori->nama_kategori }}</td>
-                        <td class="{{ $lelang->status == 'dibuka' ? 'text-green-500': 'text-red-500' }}">{{ $lelang->status }}</td>
                         <td>
                             <div class="flex items-center justify-center gap-2">
                                 <a href="/dashboard/lelang/update/{{ $lelang->id }}"

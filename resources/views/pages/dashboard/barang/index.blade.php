@@ -14,7 +14,6 @@
                 <th>Nama Barang</th>
                 <th>Tanggal</th>
                 <th>Harga Awal</th>
-                <th>Kategori</th>
                 <th>Aksi</th>
             </thead>
             <tbody>

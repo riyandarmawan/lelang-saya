@@ -28,6 +28,6 @@
             <p class="text-center">Belum punya akun? <a href="/auth/register"
                     class="font-semibold text-primary-600 hover:opacity-80">Daftar sekarang!</a></p>
         </div>
-        <img src="/images/login.jpg" alt="" class="h-full max-h-[700px] max-w-3xl rounded-xl object-cover">
+        {{-- <img src="/images/login.jpg" alt="" class="h-full max-h-[700px] max-w-3xl rounded-xl object-cover"> --}}
     </div>
 </x-base-layout>
